@@ -1,0 +1,6 @@
+{
+  "name": "Nabla Keys",
+  "description": "Precision mobile scientific keyboard featuring advanced calculus symbols, physical and mathematical constants, Unicode and LaTeX output, custom layouts, and a real Android system IME.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,79 @@
+<resources>
+    <string name="app_name">Nabla Keys</string>
+    <string name="ime_service_label">Nabla Keys Scientific</string>
+    <string name="ime_subtype_scientific">Scientific &amp; Calculus</string>
+
+    <!-- Navigation -->
+    <string name="nav_studio">Studio</string>
+    <string name="nav_vault">Vault</string>
+    <string name="nav_layout">Layout</string>
+
+    <!-- Studio Screen -->
+    <string name="studio_title">Nabla Keys</string>
+    <string name="studio_scratchpad_placeholder">Tap calculus keys, constants, or templates below to compose equations…</string>
+    <string name="studio_mode_unicode">Unicode</string>
+    <string name="studio_mode_latex">LaTeX</string>
+    <string name="studio_copy_action">Copy</string>
+    <string name="studio_clear_action">Clear</string>
+    <string name="studio_undo_action">Undo</string>
+    <string name="studio_copied_toast">Copied expression to clipboard</string>
+    <string name="studio_ime_setup_action">System IME</string>
+    <string name="studio_templates_label">Quick Formula</string>
+    <string name="studio_char_count">%1$d chars</string>
+    <string name="studio_move_cursor_left">Move cursor left</string>
+    <string name="studio_move_cursor_right">Move cursor right</string>
+
+    <!-- Vault Screen -->
+    <string name="vault_title">Symbol &amp; Constant Vault</string>
+    <string name="vault_subtitle">Pin favorites to your quick bar or insert directly</string>
+    <string name="vault_search_placeholder">Search integrals, Planck, nabla, Greek…</string>
+    <string name="vault_filter_all">All</string>
+    <string name="vault_filter_calculus">Calculus</string>
+    <string name="vault_filter_constants">Constants</string>
+    <string name="vault_filter_greek">Greek</string>
+    <string name="vault_filter_logic">Sets &amp; Logic</string>
+    <string name="vault_filter_templates">Templates</string>
+    <string name="vault_pin_action">Pin to bar</string>
+    <string name="vault_unpin_action">Unpin</string>
+    <string name="vault_insert_action">Insert</string>
+    <string name="vault_copy_value_action">Value</string>
+    <string name="vault_copy_latex_action">LaTeX</string>
+    <string name="vault_empty_title">No matching symbols</string>
+    <string name="vault_empty_body">Try searching by name, Unicode symbol, or LaTeX command like \\nabla or Planck.</string>
+
+    <!-- Layout Settings Screen -->
+    <string name="layout_title">Custom Layout Studio</string>
+    <string name="layout_subtitle">Changes sync immediately to Studio &amp; System IME</string>
+    <string name="layout_ime_card_title">Android System Keyboard</string>
+    <string name="layout_ime_status_active">Active system keyboard</string>
+    <string name="layout_ime_status_enabled">Enabled — tap Switch to select</string>
+    <string name="layout_ime_status_disabled">Enable in Android Settings to use in any app</string>
+    <string name="layout_ime_enable_btn">1. Enable Keyboard</string>
+    <string name="layout_ime_switch_btn">2. Switch Keyboard</string>
+    <string name="layout_preview_title">Live Keycap Preview</string>
+    <string name="layout_section_output">Output &amp; Constants</string>
+    <string name="layout_section_geometry">Keycap Geometry &amp; Grid</string>
+    <string name="layout_section_theme">Keycap Colorway</string>
+    <string name="layout_section_pinned">Quick-Access Bar &amp; Custom Keys</string>
+    <string name="layout_section_decks">Visible Symbol Decks</string>
+    <string name="layout_section_feedback">Tactile &amp; Display</string>
+    <string name="layout_add_custom_key">Add Custom Macro Key</string>
+    <string name="layout_reset_defaults">Reset Layout to Defaults</string>
+
+    <!-- Custom Key Dialog -->
+    <string name="dialog_custom_key_title">Create Custom Macro Key</string>
+    <string name="dialog_key_label">Keycap Label (e.g. ∂/∂t)</string>
+    <string name="dialog_key_unicode">Unicode Output</string>
+    <string name="dialog_key_latex">LaTeX Output (optional)</string>
+    <string name="dialog_key_desc">Description (optional)</string>
+    <string name="dialog_save">Save Key</string>
+    <string name="dialog_cancel">Cancel</string>
+
+    <!-- Keyboard Accessibility -->
+    <string name="kb_cd_backspace">Backspace</string>
+    <string name="kb_cd_enter">Enter or new line</string>
+    <string name="kb_cd_space">Space bar</string>
+    <string name="kb_cd_shift">Toggle uppercase or alternate symbols</string>
+    <string name="kb_cd_next_ime">Switch system keyboard</string>
+    <string name="kb_cd_mode_toggle">Toggle Unicode and LaTeX output mode</string>
+</resources>
