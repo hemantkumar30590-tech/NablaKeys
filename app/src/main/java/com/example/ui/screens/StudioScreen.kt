@@ -90,6 +90,7 @@ fun StudioScreen(
 ) {
     val clipboard = LocalClipboardManager.current
     val copiedToast = stringResource(R.string.studio_copied_toast)
+    val copiedLatexToast = stringResource(R.string.studio_copied_latex_toast)
 
     Column(
         modifier = modifier
@@ -227,7 +228,7 @@ fun StudioScreen(
                                 onClick = {
                                     if (studioValue.text.isNotEmpty()) {
                                         clipboard.setText(AnnotatedString(CasioStyle.toLatexFractions(studioValue.text)))
-                                        onCopiedFeedback(stringResource(R.string.studio_copied_latex_toast))
+                                        onCopiedFeedback(copiedLatexToast)
                                     }
                                 },
                                 enabled = studioValue.text.isNotEmpty(),
