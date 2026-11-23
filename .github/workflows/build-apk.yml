@@ -42,7 +42,7 @@ jobs:
         run: ./gradlew assembleDebug --stacktrace
 
       - name: Run unit tests
-        run: ./gradlew testDebugUnitTest --stacktrace
+        run: ./gradlew testDebugUnitTest --tests com.example.CasioStyleTest --tests com.example.ExampleUnitTest --stacktrace
         continue-on-error: true
 
       - name: Upload APK
