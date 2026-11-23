@@ -27,13 +27,8 @@ jobs:
         with:
           packages: "platforms;android-36 build-tools;36.0.0 platform-tools"
 
-      - name: Generate debug keystore
-        run: |
-          keytool -genkeypair -v \
-            -keystore "$GITHUB_WORKSPACE/debug.keystore" \
-            -storepass android -keypass android \
-            -alias androiddebugkey -keyalg RSA -keysize 2048 -validity 10000 \
-            -dname "CN=Android Debug,O=Android,C=US"
+      - name: Restore stable debug keystore
+        run: cp keystore/nabla-debug.jks "$GITHUB_WORKSPACE/debug.keystore"
 
       - name: Make Gradle wrapper executable
         run: chmod +x ./gradlew
