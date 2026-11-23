@@ -75,6 +75,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Popup
 import androidx.compose.ui.window.PopupProperties
 import com.example.R
+import com.example.data.CasioStyle
 import com.example.data.KeyDeck
 import com.example.data.KeyboardLayoutSettings
 import com.example.data.OutputMode
@@ -94,6 +95,7 @@ fun ScientificKeyboardView(
     activeDeck: KeyDeck,
     onSelectDeck: (KeyDeck) -> Unit,
     onInsertText: (String) -> Unit,
+    onInsertTemplate: (String, Int) -> Unit = { text, _ -> onInsertText(text) },
     onBackspace: () -> Unit,
     onEnter: () -> Unit,
     onMoveCursor: (Int) -> Unit,
@@ -139,7 +141,12 @@ fun ScientificKeyboardView(
                 palette = palette,
                 onSymbolClick = { symbol ->
                     triggerHaptic()
-                    onInsertText(ScientificCatalog.formatInsertion(symbol, settings, shifted = false))
+                    val template = CasioStyle.templateFor(symbol.id, settings)
+                    if (template != null) {
+                        onInsertTemplate(template.text, template.cursorOffset)
+                    } else {
+                        onInsertText(ScientificCatalog.formatInsertion(symbol, settings, shifted = false))
+                    }
                 },
                 onToggleOutputMode = {
                     triggerHaptic()
@@ -182,12 +189,22 @@ fun ScientificKeyboardView(
                     palette = palette,
                     onSelectVariant = { variant ->
                         triggerHaptic()
-                        val text = if (settings.outputMode == OutputMode.LATEX) {
-                            variant.latex
+                        val index = if (host.id == "calc_sqrt") {
+                            CasioStyle.indexForVariant(variant.label) ?: CasioStyle.indexForVariant(variant.latex)
                         } else {
-                            variant.unicode
+                            null
                         }
-                        onInsertText(text)
+                        if (host.id == "calc_sqrt") {
+                            val template = CasioStyle.radical(index, settings.outputMode)
+                            onInsertTemplate(template.text, template.cursorOffset)
+                        } else {
+                            val text = if (settings.outputMode == OutputMode.LATEX) {
+                                variant.latex
+                            } else {
+                                variant.unicode
+                            }
+                            onInsertText(text)
+                        }
                         activeVariantSymbol = null
                     },
                     onDismiss = { activeVariantSymbol = null }
@@ -227,7 +244,12 @@ fun ScientificKeyboardView(
                 onTapSymbol = { symbol ->
                     triggerHaptic()
                     activeVariantSymbol = null
-                    onInsertText(ScientificCatalog.formatInsertion(symbol, settings, shifted))
+                    val template = CasioStyle.templateFor(symbol.id, settings, shifted)
+                    if (template != null) {
+                        onInsertTemplate(template.text, template.cursorOffset)
+                    } else {
+                        onInsertText(ScientificCatalog.formatInsertion(symbol, settings, shifted))
+                    }
                 },
                 onLongPressSymbol = { symbol ->
                     if (symbol.variants.isNotEmpty()) {
@@ -235,7 +257,12 @@ fun ScientificKeyboardView(
                         activeVariantSymbol = symbol
                     } else if (symbol.shiftedUnicode != null) {
                         triggerHaptic()
-                        onInsertText(ScientificCatalog.formatInsertion(symbol, settings, shifted = !shifted))
+                        val template = CasioStyle.templateFor(symbol.id, settings, !shifted)
+                        if (template != null) {
+                            onInsertTemplate(template.text, template.cursorOffset)
+                        } else {
+                            onInsertText(ScientificCatalog.formatInsertion(symbol, settings, shifted = !shifted))
+                        }
                     } else if (symbol.numericValue != null) {
                         triggerHaptic()
                         onInsertText(symbol.numericValue)

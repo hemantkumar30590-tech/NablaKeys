@@ -5,6 +5,7 @@ import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.data.CasioStyle
 import com.example.data.ConstantInsertMode
 import com.example.data.FormulaTemplate
 import com.example.data.KeyCornerPreset
@@ -118,6 +119,22 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             template.unicode
         }
         insertIntoStudio(out)
+    }
+
+    /** Inserts a template and leaves the cursor inside its placeholder. */
+    fun insertWithCursor(text: String, cursorOffset: Int) {
+        val current = _studioValue.value
+        pushUndo(current)
+        val start = current.selection.min.coerceIn(0, current.text.length)
+        val end = current.selection.max.coerceIn(0, current.text.length)
+        val offset = cursorOffset.coerceIn(0, text.length)
+        val updated = current.text.substring(0, start) + text + current.text.substring(end)
+        _studioValue.value = TextFieldValue(updated, TextRange(start + offset))
+    }
+
+    fun insertCasioTemplate(kind: String, shifted: Boolean = false) {
+        val template = CasioStyle.templateFor(kind, settings.value, shifted) ?: return
+        insertWithCursor(template.text, template.cursorOffset)
     }
 
     fun backspaceStudio() {

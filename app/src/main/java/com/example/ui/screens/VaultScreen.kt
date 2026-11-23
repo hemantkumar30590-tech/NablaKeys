@@ -268,8 +268,13 @@ fun VaultScreen(
                                 outputMode = settings.outputMode,
                                 onInsert = { onInsertTemplate(tpl) },
                                 onCopyLatex = {
-                                    clipboard.setText(AnnotatedString(tpl.latex))
-                                    onCopyFeedback("Copied LaTeX for ${tpl.title}")
+                                    val displayed = if (settings.outputMode == OutputMode.LATEX) {
+                                        tpl.latex
+                                    } else {
+                                        tpl.unicode
+                                    }
+                                    clipboard.setText(AnnotatedString(displayed))
+                                    onCopyFeedback("Copied formula for ${tpl.title}")
                                 }
                             )
                         }
@@ -307,8 +312,13 @@ fun VaultScreen(
                                 outputMode = settings.outputMode,
                                 onInsert = { onInsertTemplate(tpl) },
                                 onCopyLatex = {
-                                    clipboard.setText(AnnotatedString(tpl.latex))
-                                    onCopyFeedback("Copied LaTeX for ${tpl.title}")
+                                    val displayed = if (settings.outputMode == OutputMode.LATEX) {
+                                        tpl.latex
+                                    } else {
+                                        tpl.unicode
+                                    }
+                                    clipboard.setText(AnnotatedString(displayed))
+                                    onCopyFeedback("Copied formula for ${tpl.title}")
                                 }
                             )
                         }
@@ -515,7 +525,7 @@ private fun TemplateVaultCard(
                     onClick = onInsert
                 )
                 SmallActionChip(
-                    label = stringResource(R.string.vault_copy_latex_action),
+                    label = stringResource(R.string.studio_copy_action),
                     icon = Icons.Filled.ContentCopy,
                     highlighted = false,
                     onClick = onCopyLatex

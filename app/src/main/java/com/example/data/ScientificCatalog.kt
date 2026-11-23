@@ -342,10 +342,10 @@ object ScientificCatalog {
         ),
         ScientificSymbol(
             id = "calc_sqrt",
-            label = "√",
+            label = "√( )",
             unicode = "√",
             latex = "\\sqrt{}",
-            name = "Square Root",
+            name = "Square Root (full radicand)",
             deck = KeyDeck.CALCULUS,
             shiftedLabel = "∛",
             shiftedUnicode = "∛",
@@ -354,6 +354,22 @@ object ScientificCatalog {
                 SymbolVariant("∛", "∛", "\\sqrt[3]{}", "Cube root"),
                 SymbolVariant("∜", "∜", "\\sqrt[4]{}", "Fourth root")
             )
+        ),
+        ScientificSymbol(
+            id = "calc_frac",
+            label = "a⁄b",
+            unicode = "a⁄b",
+            latex = "\\frac{}{}",
+            name = "Fraction Template (top line bottom)",
+            deck = KeyDeck.CALCULUS
+        ),
+        ScientificSymbol(
+            id = "calc_nth_root",
+            label = "ˣ√",
+            unicode = "ˣ√",
+            latex = "\\sqrt[n]{}",
+            name = "Nth Root (full radicand)",
+            deck = KeyDeck.CALCULUS
         ),
         ScientificSymbol(
             id = "calc_pm",

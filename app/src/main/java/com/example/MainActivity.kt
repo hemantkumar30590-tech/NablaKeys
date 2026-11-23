@@ -203,6 +203,7 @@ private fun NablaKeysApp(
                             onUpdateStudioValue = viewModel::updateStudioValue,
                             onSelectDeck = viewModel::selectDeck,
                             onInsertText = viewModel::insertIntoStudio,
+                            onInsertAtCursor = viewModel::insertWithCursor,
                             onInsertTemplate = viewModel::insertTemplate,
                             onBackspace = viewModel::backspaceStudio,
                             onMoveCursor = viewModel::moveStudioCursor,

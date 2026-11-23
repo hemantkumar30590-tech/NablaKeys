@@ -17,6 +17,9 @@
     <string name="studio_clear_action">Clear</string>
     <string name="studio_undo_action">Undo</string>
     <string name="studio_copied_toast">Copied expression to clipboard</string>
+    <string name="studio_copy_latex_action">Copy as LaTeX fraction</string>
+    <string name="studio_copied_latex_toast">Copied with \\frac and \\sqrt style</string>
+    <string name="studio_raw_input_label">Editable input</string>
     <string name="studio_ime_setup_action">System IME</string>
     <string name="studio_templates_label">Quick Formula</string>
     <string name="studio_char_count">%1$d chars</string>

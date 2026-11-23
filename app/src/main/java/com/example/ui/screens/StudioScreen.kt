@@ -25,6 +25,7 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Undo
+import androidx.compose.material.icons.filled.Code
 import androidx.compose.material.icons.filled.ContentCopy
 import androidx.compose.material.icons.filled.DeleteOutline
 import androidx.compose.material.icons.filled.Functions
@@ -53,12 +54,14 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.R
+import com.example.data.CasioStyle
 import com.example.data.FormulaTemplate
 import com.example.data.KeyDeck
 import com.example.data.KeyboardLayoutSettings
 import com.example.data.OutputMode
 import com.example.data.ScientificCatalog
 import com.example.ime.ImeStatus
+import com.example.ui.CasioNaturalPreview
 import com.example.ui.keyboard.ScientificKeyboardView
 import com.example.ui.theme.DisplayFontFamily
 import com.example.ui.theme.MathMonoFontFamily
@@ -74,6 +77,7 @@ fun StudioScreen(
     onUpdateStudioValue: (TextFieldValue) -> Unit,
     onSelectDeck: (KeyDeck) -> Unit,
     onInsertText: (String) -> Unit,
+    onInsertAtCursor: (String, Int) -> Unit,
     onInsertTemplate: (FormulaTemplate) -> Unit,
     onBackspace: () -> Unit,
     onMoveCursor: (Int) -> Unit,
@@ -220,6 +224,25 @@ fun StudioScreen(
                                 )
                             }
                             IconButton(
+                                onClick = {
+                                    if (studioValue.text.isNotEmpty()) {
+                                        clipboard.setText(AnnotatedString(CasioStyle.toLatexFractions(studioValue.text)))
+                                        onCopiedFeedback(stringResource(R.string.studio_copied_latex_toast))
+                                    }
+                                },
+                                enabled = studioValue.text.isNotEmpty(),
+                                modifier = Modifier
+                                    .size(36.dp)
+                                    .testTag("studio_copy_latex_button")
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Filled.Code,
+                                    contentDescription = stringResource(R.string.studio_copy_latex_action),
+                                    tint = MaterialTheme.colorScheme.secondary,
+                                    modifier = Modifier.size(18.dp)
+                                )
+                            }
+                            IconButton(
                                 onClick = onClear,
                                 enabled = studioValue.text.isNotEmpty(),
                                 modifier = Modifier
@@ -245,6 +268,17 @@ fun StudioScreen(
                             .fillMaxWidth()
                             .verticalScroll(rememberScrollState())
                     ) {
+                        if (studioValue.text.isNotEmpty()) {
+                            CasioNaturalPreview(
+                                text = studioValue.text,
+                                modifier = Modifier.padding(bottom = 8.dp)
+                            )
+                            Text(
+                                text = stringResource(R.string.studio_raw_input_label),
+                                style = MaterialTheme.typography.labelSmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
                         if (studioValue.text.isEmpty()) {
                             Text(
                                 text = stringResource(R.string.studio_scratchpad_placeholder),
@@ -299,6 +333,7 @@ fun StudioScreen(
                 activeDeck = activeDeck,
                 onSelectDeck = onSelectDeck,
                 onInsertText = onInsertText,
+                onInsertTemplate = onInsertAtCursor,
                 onBackspace = onBackspace,
                 onEnter = { onInsertText("\n") },
                 onMoveCursor = onMoveCursor,

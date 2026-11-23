@@ -86,6 +86,9 @@ class NablaInputMethodService :
                         onInsertText = { text ->
                             currentInputConnection?.commitText(text, 1)
                         },
+                        onInsertTemplate = { text, cursorOffset ->
+                            currentInputConnection?.commitText(text, cursorOffset)
+                        },
                         onBackspace = { handleBackspace() },
                         onEnter = { handleEnter() },
                         onMoveCursor = { delta ->
